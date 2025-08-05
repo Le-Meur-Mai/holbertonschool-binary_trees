@@ -90,10 +90,7 @@ int binary_tree_traverse(const binary_tree_t *tree)
 	left_side = binary_tree_traverse(tree->left) + 1;
 	right_side = binary_tree_traverse(tree->right) + 1;
 
-	if (left_side != right_side)
-		return (0);
-
-	return (1);
+	return (left_side + right_side);
 }
 
 /**
@@ -104,6 +101,7 @@ int binary_tree_traverse(const binary_tree_t *tree)
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	int result = 0;
+	int result_2 = 0;
 
 	if (tree == NULL)
 		return (0);
@@ -116,8 +114,9 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (result != 1)
 		return (0);
 
-	result = binary_tree_traverse(tree);
-	if (result != 1)
+	result = binary_tree_traverse(tree->left);
+	result_2 = binary_tree_traverse(tree->right);
+	if (result != result_2)
 		return (0);
 	return (1);
 }

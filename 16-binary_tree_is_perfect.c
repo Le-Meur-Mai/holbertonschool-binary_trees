@@ -71,6 +71,30 @@ int binary_tree_is_full(const binary_tree_t *tree)
 	}
 	return (result_l);
 }
+/**
+ * binary_tree_traverse- Determine if a binary have the same number of nodes on
+ * each side.
+ * @tree: the node in the binary tree you want to check.
+ * Return: 0 if it doesn't have the same number of nodes on each side, 1 if it
+ * does.
+ */
+
+int binary_tree_traverse(const binary_tree_t *tree)
+{
+	int left_side = 0;
+	int right_side = 0;
+
+	if (tree == NULL)
+		return (0);
+
+	left_side = binary_tree_traverse(tree->left) + 1;
+	right_side = binary_tree_traverse(tree->right) + 1;
+
+	if (left_side != right_side)
+		return (0);
+
+	return (1);
+}
 
 /**
  * binary_tree_is_perfect - checks if a binary tree is perfect
@@ -92,5 +116,8 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (result != 1)
 		return (0);
 
+	result = binary_tree_traverse(tree);
+	if (result != 1)
+		return (0);
 	return (1);
 }
